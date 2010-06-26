@@ -72,11 +72,12 @@ run_git tag -f tag_start HEAD
 run_git tag -f tag_target svn
 
 #
-# Pull all changes from the bare repo. If there are no commits to pull in then this
-# is an error - why else would this script be called if it hadn't been for a push?
+# Pull master branch only from origin/master. No branches, no tags - just
+# master - it's complicated enough without having to sync git branches and tags
 #
 repo=$(basename $(git config remote.origin.url))
-run_git fetch --no-tags
+
+run_git fetch origin master:refs/remotes/origin/master --no-tags
 num=$(git log --pretty=oneline HEAD..FETCH_HEAD | wc -l)
 if [ $num -gt 0 ]; then
 	echo -n "-- merging $num commits from $repo..."
@@ -94,7 +95,7 @@ fi
 run_git checkout svn
 run_git reset --hard master
 run_git rebase --onto tag_target tag_start svn
-run_git svn fetch --all
+run_git svn fetch --all 
 
 num=$(git log --pretty=oneline HEAD..svn/trunk | wc -l)
 test $num -gt 0 && echo "-- received $num commits from svn"
