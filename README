@@ -36,14 +36,14 @@ solutions for this scenario, but with no joy - so I'm doing it myself. In short:
 4. Architecture
 ----------------
                                                             -------
-                                                      ---> | dev b |
-                                                     |      -------
- ----------         ---------          ----------    |      -------
-| SVN repo | <---> | gateway | <----> | bare-git | <-----> | dev a |
- ----------         ---------          ----------    |      -------
-                                                     |      -------
-								                      ---> | dev c |
-								                            -------
+                                                       ---> | dev b |
+                                                      |      -------
+ ----------         ---------          ----------     |      -------
+| SVN repo | <---> | gateway | <----> | bare-git | <----->  | dev a |
+ ----------         ---------          ----------     |      -------
+                                                      |      -------
+                                                       ---> | dev c |
+                                                            -------
 Don't you just love ascii art? Hmmmm...
 
 
