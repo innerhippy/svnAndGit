@@ -14,7 +14,7 @@ now it's my job to manage the development process - and the most obvious thing
 go change is the SCM. So I need to prove to the company that Git it the way forward 
 before they will consider making the switch. We've earmarked a project to use Git, but
 we still need a mechanism to bridge the repos - Git commits need to appear in SVN and 
-vica verca.
+vica versa.
 
 The repos we will use in the project are still under active development by other
 departments in the company, so it is imperative that we maintain this bi-directional
@@ -22,8 +22,8 @@ workflow between SVN and Git.
 
 I am also very keen to have my developers experience the full awesomeness of Git without
 having to fart around using the git-svn commands. The rebase side-effects of git-svn means
-that collaboration bewteen team members will be impossible. I need them to see a standard 
-Git repo for the project - the SVN synchronisation should just happen automagically.
+that collaboration between team members will be impossible. I need them to see a standard 
+Git repo for the project - the SVN synchronization should just happen automagically.
 
 3. Warning
 ----------
@@ -35,15 +35,15 @@ solutions for this scenario, but with no joy - so I'm doing it myself. In short:
 
 4. Architecture
 ----------------
-                                                                            -------
-                                                                     --->  | dev b |
-                                                                    |       -------
- ----------               ---------                ----------       |       -------
-| SVN repo | <---------> | gateway |  <---------> | bare-git | <-------->  | dev a |
- ----------               ---------                ----------       |       -------
-                                                                    |       -------
-								     --->  | dev c |
-								            -------
+                                                            -------
+                                                      ---> | dev b |
+                                                     |      -------
+ ----------         ---------          ----------    |      -------
+| SVN repo | <---> | gateway | <----> | bare-git | <-----> | dev a |
+ ----------         ---------          ----------    |      -------
+                                                     |      -------
+								                      ---> | dev c |
+								                            -------
 Don't you just love ascii art? Hmmmm...
 
 
@@ -75,7 +75,7 @@ the rebase operations done by git-svn-rebase and git-svn-dcommit. So we maintain
 the gateway: master that tracks the bare-git repo, and svn that deals with svn imports/exports.
 
 Changes from the master branch (ie commits from our developers) are rebased onto the svn branch
-before being commited and then dcommited to the svn repo. Changes from svn are just merged into
+before being committed and then dcommited to the svn repo. Changes from svn are just merged into
 the master branch. We still need to converge the branches are some stage, but we cannot
 do any rebases on the master branch as this would screw up the developers repos.
 
@@ -129,6 +129,6 @@ hopefully this will be of use to someone else.
 
 10. Thanks
 ------------
-Parts of the script where shamlessley ripped from http://github.com/nothingmuch/git-svn-abandon.git
+Parts of the script where shamlessly ripped from http://github.com/nothingmuch/git-svn-abandon.git
 Thanks to Yuval Kogman for this great work.
 
